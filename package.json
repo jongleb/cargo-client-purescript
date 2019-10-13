@@ -1,0 +1,44 @@
+{
+  "name": "cargo-client-purescript",
+  "version": "0.0.1",
+  "description": "Cargo",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "webpack": "DEBUG=purs-loader* DEBUG_DEPTH=100 webpack --mode development --progress --bail",
+    "webpack:watch": "DEBUG=purs-loader* DEBUG_DEPTH=100 webpack --mode development --progress --display-error-details --display verbose --watch",
+    "webpack:server": "webpack-dev-server --mode development --progress --inline --hot",
+    "webpack:server:debug": "DEBUG=purs-loader* DEBUG_DEPTH=100 webpack-dev-server --mode development --progress --inline --hot",
+    "purs:compile": "purs compile 'src/**/*.purs'",
+    "purs:bundle": "purs bundle output/**/*.js",
+    "start": "node bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jongleb/cargo-client-purescript.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jongleb/cargo-client-purescript/issues"
+  },
+  "homepage": "https://github.com/jongleb/cargo-client-purescript#readme",
+  "dependencies": {
+    "decimal.js": "^10.1.1",
+    "html-webpack-plugin": "^3.2.0",
+    "http-server": "^0.11.1",
+    "marked": "^0.6.2",
+    "parcel": "^1.12.4",
+    "purescript-psa": "^0.7.3",
+    "purs-loader": "^3.6.0",
+    "webpack": "^4.41.1",
+    "webpack-dev-server": "^3.8.2",
+    "wrappy": "^1.0.2"
+  },
+  "devDependencies": {
+    "url-loader": "^2.2.0",
+    "webpack-cli": "^3.3.9"
+  }
+}

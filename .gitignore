@@ -5,4 +5,8 @@ node_modules
 
 # Generated files
 .psci
+.spago
+.cache
+.psc-ide-port
 output
+dist
