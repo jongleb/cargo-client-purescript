@@ -121,8 +121,36 @@ let additions =
 let upstream =
       https://github.com/purescript/package-sets/releases/download/psc-0.13.3-20191005/packages.dhall sha256:ba287d858ada09c4164792ad4e643013b742c208cbedf5de2e35ee27b64b6817
 
-let overrides = {=}
+let overrides = {
+    react-basic =
+          upstream.react-basic
+       // { repo = "https://github.com/lumihq/purescript-react-basic.git"
+          , version = "madeline/expose-dom-react-components"
+          , dependencies = [
+                "console",
+                "record"
+            ]    
+          }
+}
 
-let additions = {=}
+let additions = {
+    react-basic-emotion =
+      { 
+      dependencies = [
+        "prelude",
+        "console",
+        "effect",
+        "react-basic",
+        "indexed-monad",
+        "unsafe-reference",
+        "aff",
+        "typelevel-prelude"
+      ]    
+      ,repo =
+          "https://github.com/lumihq/purescript-react-basic-emotion.git"
+      , version =
+          "master"  -- branch, tag, or commit hash
+      }
+}
 
 in  upstream // overrides // additions

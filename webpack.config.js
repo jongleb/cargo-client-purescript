@@ -20,20 +20,30 @@ const plugins =
   ]
 ;
 
+const cssLoaders = [
+  !isWebpackDevServer? MiniCssExtractPlugin.loader : 'style-loader',
+  { loader: 'css-loader', options: { sourceMap: isWebpackDevServer } },
+  { loader: 'postcss-loader', options: { sourceMap: isWebpackDevServer } },
+  { loader: 'stylus-loader', options: { sourceMap: isWebpackDevServer } }
+]
+
+
 module.exports = {
   devtool: 'eval-source-map',
 
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
     port: 4008,
-    stats: 'errors-only'
+    stats: 'errors-only',
+
   },
 
   entry: './src/entrypoint.js',
 
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: "/"
   },
 
   module: {
@@ -54,16 +64,42 @@ module.exports = {
           }
         ]
       },
+      { test: /\.jpg$/, use: [ "file-loader" ] },
+      { test: /\.png$/, use: [ "url-loader?mimetype=image/png" ] },
       {
-        test: /\.(png|jpg|gif)$/i,
+        test: /\.css$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: true
+            }
+          }
+        ]
+      },
+      {
+        test: /\.styl$/,
         use: [
           {
-            loader: 'url-loader',
-            options: {
-              limit: 8192,
-            },
+            loader: "style-loader" // creates style nodes from JS strings
           },
-        ],
+          {
+            loader: "css-loader" // translates CSS into CommonJS
+          },
+          {
+            loader: "stylus-loader" // compiles Stylus to CSS
+          }
+        ]
+      },
+      {
+        test: /\.(html)$/,
+        use: {
+          loader: 'html-loader',
+          options: {
+            attrs: ['img:src']
+          }
+        }
       },
     ]
   },
@@ -81,5 +117,5 @@ module.exports = {
       title: 'purescript-webpack-example',
       template: 'index.html'
     })
-  ].concat(plugins)
+  ].concat(plugins),
 };
