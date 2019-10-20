@@ -2,12 +2,10 @@ module Landing.Advert.Header where
 
 import Prelude
 
-import CSS (fontFamily, fontSize)
 import Effect (Effect)
 import React.Basic.DOM as R
 import React.Basic.Emotion as E
 import React.Basic.Hooks (ReactComponent, component)
-import Web.HTML.HTMLElement (className)
 
 foreign import logo :: String
 
